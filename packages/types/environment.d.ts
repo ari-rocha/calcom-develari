@@ -70,6 +70,16 @@ declare namespace NodeJS {
      */
     readonly NEXT_PUBLIC_POWERED_BY_URL: string | undefined;
     /**
+     * Optional SVG logo URL used by `/api/logo` for `type=logo`.
+     * Example: https://develari.com/logo.svg
+     */
+    readonly NEXT_PUBLIC_BRAND_LOGO_SVG_URL: string | undefined;
+    /**
+     * Optional SVG logo URL used by `/api/logo` for `type=logo` when `theme=dark`.
+     * Example: https://develari.com/logo-dark.svg
+     */
+    readonly NEXT_PUBLIC_BRAND_LOGO_DARK_SVG_URL: string | undefined;
+    /**
      * Optional SVG favicon URL used by `/api/logo` for `type=icon|favicon-*`.
      * Example: https://develari.com/favicon.svg
      */

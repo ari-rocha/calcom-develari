@@ -120,6 +120,14 @@ function resolveCustomFaviconUrl({ theme }: { theme?: string }) {
   );
 }
 
+function resolveCustomLogoUrl({ theme }: { theme?: string }) {
+  const isDark = theme === "dark";
+  return (
+    (isDark ? process.env.NEXT_PUBLIC_BRAND_LOGO_DARK_SVG_URL : undefined) ??
+    process.env.NEXT_PUBLIC_BRAND_LOGO_SVG_URL
+  );
+}
+
 async function getTeamLogos(subdomain: string, isValidOrgDomain: boolean) {
   try {
     if (
@@ -198,10 +206,15 @@ async function getHandler(request: NextRequest) {
   const type: LogoType = parsedQuery?.type && isValidLogoType(parsedQuery.type) ? parsedQuery.type : "logo";
   const logoDefinition = logoDefinitions[type];
   const customFaviconUrl = resolveCustomFaviconUrl({ theme: parsedQuery.theme });
+  const customLogoUrl = resolveCustomLogoUrl({ theme: parsedQuery.theme });
+
   const filteredLogo =
+    teamLogos[logoDefinition.source] ??
+    (customLogoUrl && type === "logo" ? customLogoUrl : undefined) ??
     (customFaviconUrl && (type === "icon" || type === "favicon-16" || type === "favicon-32")
       ? customFaviconUrl
-      : teamLogos[logoDefinition.source]) ?? logoDefinition.fallback;
+      : undefined) ??
+    logoDefinition.fallback;
 
   try {
     let response: Response;
