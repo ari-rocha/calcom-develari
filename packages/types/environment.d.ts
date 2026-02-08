@@ -65,6 +65,11 @@ declare namespace NodeJS {
     readonly NEXT_PUBLIC_SUPPORT_MAIL_ADDRESS: string | "help@cal.com";
     readonly NEXT_PUBLIC_COMPANY_NAME: string | "Cal.com, Inc.";
     /**
+     * Hide instance branding in the booker/embed UI (e.g. the "Powered by" footer).
+     * Set to "1" to enable.
+     */
+    readonly NEXT_PUBLIC_HIDE_BRANDING: "1" | undefined;
+    /**
      * Optional URL used in the "Powered by" footer link.
      * Example: https://develari.com
      */
