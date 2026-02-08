@@ -13,6 +13,7 @@ const PoweredByCal = ({
 }) => {
   const { t } = useLocale();
   const isEmbed = useIsEmbed();
+  const hasCustomBrandIcon = !!process.env.NEXT_PUBLIC_BRAND_FAVICON_SVG_URL;
 
   return (
     <div className={`p-2 text-center text-xs sm:text-right${isEmbed ? " max-w-3xl" : ""}`}>
@@ -24,6 +25,19 @@ const PoweredByCal = ({
               className="-mt-px inline h-[10px] w-auto dark:invert"
               src={`${process.env.NEXT_PUBLIC_WEBAPP_URL}/api/logo`}
               alt="Cal.com Logo"
+            />
+          </>
+        ) : hasCustomBrandIcon ? (
+          <>
+            <img
+              className="-mt-px inline h-[10px] w-auto dark:hidden"
+              src={`${process.env.NEXT_PUBLIC_WEBAPP_URL}/api/logo?type=icon&theme=light`}
+              alt={`${APP_NAME} Logo`}
+            />
+            <img
+              className="-mt-px hidden h-[10px] w-auto dark:inline"
+              src={`${process.env.NEXT_PUBLIC_WEBAPP_URL}/api/logo?type=icon&theme=dark`}
+              alt={`${APP_NAME} Logo`}
             />
           </>
         ) : (
